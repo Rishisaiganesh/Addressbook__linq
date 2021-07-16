@@ -12,6 +12,10 @@ namespace AddressBookLinq
             address.InsertinvaluesinRow();
             address.DisplayContacts();
             address.Edit();
+            address.DeliteContact("Rishi");
+            Console.WriteLine("after deliting Contact");
+            address.DisplayContacts();
+
         }
     }
 }

@@ -78,5 +78,27 @@ namespace AddressBookLinq
                 Console.WriteLine(e.Message);
             }
         }
+        public void DeliteContact(string firstName)
+        {
+            try
+            {
+                var DelitingRow = table.AsEnumerable().Where(a => a.Field<string>("FirstName").Equals(firstName)).FirstOrDefault();
+                if(DelitingRow != null)
+                {
+                    DelitingRow.Delete();
+                    Console.Write("Contacts delite sucessfully", firstName);
+                    DisplayContacts();
+                }
+                else
+                {
+                    Console.WriteLine("There is no such Type FirstName in Contact list");
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+        }
     }
 }
