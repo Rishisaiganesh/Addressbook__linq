@@ -11,6 +11,7 @@ namespace AddressBookLinq
             address.CreateAddressTable();
             address.InsertinvaluesinRow();
             address.DisplayContacts();
+            address.Edit();
         }
     }
 }

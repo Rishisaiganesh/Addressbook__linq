@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookLinq
@@ -28,11 +29,11 @@ namespace AddressBookLinq
 
         public void InsertinvaluesinRow()
         {
-           // table.Rows.Add("Rishi", "saiganesh", "Balaji nagr", "Nellore", "Ap", "509132", "8678906541", "ganesh74@gmail.com");
-            table.Rows.Add("Reddy", "sravankumar", "X-nagar", "gadwal", "Delhi", "590345", "9085555321", "Booo87@gmail.com");
-            table.Rows.Add("navin", "Reddy", "rrcomplex", "govindNagr", "Madhaypradesh", "509234", "7896555225", "abs888@gmail.com");
-            table.Rows.Add("Bhasker", "sravankumar", "Ysrnagar", "Ananthpur", "Andhrapradesh", "590345", "9085555321", "Booo87@gmail.com");
-            table.Rows.Add("rakesh", "Reddy", "Vijyacomplex", "Kadapa", "Andhrapradesh", "509234", "7896555225", "abs888@gmail.com");
+            table.Rows.Add("Rishi", "saiganesh", "Balaji nagr", "Nellore", "Ap", "509132", "8678906541");
+            table.Rows.Add("Reddy", "sravankumar", "X-nagar", "gadwal", "Delhi", "590345", "9085555321" );
+            table.Rows.Add("navin", "Reddy", "rrcomplex", "govindNagr", "Madhaypradesh", "509234", "7896555225" );
+            table.Rows.Add("Bhasker", "sravankumar", "Ysrnagar", "Ananthpur", "Andhrapradesh", "590345", "9085555321");
+            table.Rows.Add("rakesh", "Reddy", "Vijyacomplex", "Kadapa", "Andhrapradesh", "509234", "7896555225");
             Console.WriteLine("Contact added succesfully");
         }
         /// <summary>
@@ -43,14 +44,38 @@ namespace AddressBookLinq
             foreach (var Table in table.AsEnumerable())
             {
                 // getting all index in column.
-                Console.WriteLine("\nFirstName:-" + Table.Field<string>("FirstName"));
+                Console.WriteLine("FirstName:-" + Table.Field<string>("FirstName"));
                 Console.WriteLine("LastName:-" + Table.Field<string>("LastName"));
                 Console.WriteLine("Address:-" + Table.Field<string>("Address"));
                 Console.WriteLine("City:-" + Table.Field<string>("City"));
                 Console.WriteLine("State:-" + Table.Field<string>("State"));
-                Console.WriteLine("ZipCode:-" + Table.Field<int>("ZipCode"));
+                Console.WriteLine("ZipCode:-" + Table.Field<int>("PinCode"));
                 Console.WriteLine("PhoneNumber:-" + Table.Field<long>("PhoneNumber"));
-                Console.WriteLine("EmailId:-" + Table.Field<string>("EmailId"));
+            }
+        }
+        public void Edit()
+        {
+            try
+            {
+                string newName = "Ganesh";
+                var EditContact = table.AsEnumerable().Where(x => x.Field<string>("FirstName").Equals(newName)).FirstOrDefault();
+                if (EditContact != null)
+                {
+                    EditContact.SetField("LastName", "Sai");
+                    EditContact.SetField("PhoneNumber", "9898989898");
+                    EditContact.SetField("City", "VijayaWada");
+                    EditContact.SetField("State", "Andhrapradesh");
+                    Console.WriteLine("New Contact Edit", newName);
+                    DisplayContacts();
+                }
+                else
+                {
+                    Console.WriteLine("there is no Such Contact address");
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
