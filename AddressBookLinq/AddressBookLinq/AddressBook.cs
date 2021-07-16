@@ -100,5 +100,17 @@ namespace AddressBookLinq
 
             }
         }
+        public void GettingDataByCity()
+        {
+            Contacts contacts = new Contacts();
+            var records = table.AsEnumerable().Where(x => x.Field<string>("City").Equals(contacts.City)).FirstOrDefault();
+            foreach (var table in table.AsEnumerable())
+            {
+                // Get all field by column index.
+                Console.WriteLine("FirstName:-" + table.Field<string>("FirstName") + "LastName:-" + table.Field<string>("LastName") + "Address:-" + table.Field<string>("Address") +
+                    " City:-" + table.Field<string>("City") + " State:-" + table.Field<string>("State") +
+                    "PinCode:-" + table.Field<string>("PinCode") + " PhoneNumber:-" + table.Field<string>("PhoneNumber"));
+            }
+        }
     }
 }

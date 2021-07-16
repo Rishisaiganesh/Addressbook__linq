@@ -15,7 +15,7 @@ namespace AddressBookLinq
             address.DeliteContact("Rishi");
             Console.WriteLine("after deliting Contact");
             address.DisplayContacts();
-
+            address.GettingDataByCity();
         }
     }
 }
